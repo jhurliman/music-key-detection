@@ -40,7 +40,7 @@ def detect_key(audio):
 
 def handler(event, context):
     # Sanity check "filename" and "content" appear in the event
-    if "filename" not in event or "content" not in event:
+    if event is None or "filename" not in event or "content" not in event:
         return {
             "statusCode": 400,
             "body": json.dumps({"error": "Missing filename or content"}),

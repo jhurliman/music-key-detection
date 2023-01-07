@@ -1,3 +1,4 @@
+import os
 import unittest
 import index
 
@@ -21,9 +22,10 @@ class TestHandlerCase(unittest.TestCase):
 
     def test_key_detection(self):
         filename = "preludeincmajor-30s.mp3"
-        print(f"testing key detection for {filename}.")
+        filepath = os.path.join(os.path.abspath(os.path.dirname(__file__)), filename)
+        print(f"testing key detection for {filepath}.")
         # load the mp3 into a base64 encoded string
-        with open(filename, "rb") as f:
+        with open(filepath, "rb") as f:
             content = f.read()
         base64_content = content.encode("base64")
         result = index.handler({"filename": filename, "content": base64_content}, None)
