@@ -2,6 +2,8 @@ import os
 import unittest
 import index
 
+from base64 import b64encode
+
 
 class TestHandlerCase(unittest.TestCase):
     def test_empty_request(self):
@@ -27,7 +29,7 @@ class TestHandlerCase(unittest.TestCase):
         # load the mp3 into a base64 encoded string
         with open(filepath, "rb") as f:
             content = f.read()
-        base64_content = content.encode("base64")
+        base64_content = b64encode(content)
         result = index.handler({"filename": filename, "content": base64_content}, None)
         print(result)
         self.assertEqual(result["statusCode"], 200)
